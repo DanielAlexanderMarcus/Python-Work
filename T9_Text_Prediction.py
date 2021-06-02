@@ -3,6 +3,7 @@ def t9_to_words(numbers, key_map, valid_words):
     lst_final=[]
     length=0
     pre=''
+    string=''
     for i in valid_words:
         if len(i)==len(numbers):
             while length<=len(i)-1:
@@ -10,9 +11,12 @@ def t9_to_words(numbers, key_map, valid_words):
                 num=numbers[length]
                 key=key_map[int(num)]
                 if pre[length] in key:
-                    if i not in lst:
+                    string=string+pre[length]
+                    if len(string)==len(numbers):
                         lst.append(i)
                 length=length+1
+            string=''    
+            pre=''
             length=0 
             lst_final.append(lst) 
             lst=[]
@@ -20,4 +24,4 @@ def t9_to_words(numbers, key_map, valid_words):
         for j in i:
             lst.append(j)
     print(lst)
-    return lst 
+    return lst  
