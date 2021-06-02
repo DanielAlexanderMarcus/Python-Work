@@ -10,14 +10,14 @@ def t9_to_words(numbers, key_map, valid_words):
                 num=numbers[length]
                 key=key_map[int(num)]
                 if pre[length] in key:
-                    lst.append(i)
+                    if i not in lst:
+                        lst.append(i)
                 length=length+1
             length=0 
             lst_final.append(lst) 
             lst=[]
     for i in lst_final:
         for j in i:
-            if j not in lst:
-                lst.append(j)
+            lst.append(j)
     print(lst)
-    return lst
+    return lst 
