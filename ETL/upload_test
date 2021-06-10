@@ -7,20 +7,21 @@ conn = pyodbc.connect('Driver={SQL Server};'
                       'Database=LOCAL;'
                       'Trusted_Connection=yes;')
 
+var = ''
 
 files = os.listdir('C:\\')
 for i in files:
     if i.endswith('.csv')==1:
         with open('C:\\'+i) as file:
             my_reader = csv.reader(file, delimiter=',')
+            next(my_reader)
             print(i)
             for row in my_reader:
-               print(row)
+               var=row[0]
+               print(var)
+               cursor = conn.cursor()
+               cursor.execute("insert python.raw_prospects (prospects) values (?);", var)
+               cursor.commit()
 
-
-
-cursor = conn.cursor()
-cursor.execute('SELECT * FROM dbo.dim_brands')
-
-for row in cursor:
-    print(row)
+#for row in cursor:
+    #print(row)
